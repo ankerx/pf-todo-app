@@ -72,6 +72,7 @@ function RegisterForm({ user, setUser, setIsLoggedIn, setToken }) {
           onChange={handleChange}
           value={formData.email}
           name="email"
+          required
         />
         {formErrors.email && (
           <p className="text-red-500 text-sm">{formErrors.email}</p>
@@ -84,6 +85,7 @@ function RegisterForm({ user, setUser, setIsLoggedIn, setToken }) {
           onChange={handleChange}
           value={formData.password}
           name="password"
+          required
         />
 
         <label>Confirm password</label>
@@ -94,6 +96,7 @@ function RegisterForm({ user, setUser, setIsLoggedIn, setToken }) {
           onChange={handleChange}
           value={formData.confirmedPassword}
           name="confirmedPassword"
+          required
         />
         {formErrors.password && (
           <p className="text-red-500 text-sm">{formErrors.password}</p>

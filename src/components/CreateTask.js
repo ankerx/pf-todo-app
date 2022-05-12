@@ -10,6 +10,7 @@ function CreateTask({ token, value, setValue }) {
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
   const handleSubmit = (e) => {
     axios
       .post(
@@ -36,7 +37,9 @@ function CreateTask({ token, value, setValue }) {
           placeholder="Name of the task"
           value={value}
           onChange={handleChange}
+          required
         />
+
         <div className="w-full">
           <button
             onClick={handleSubmit}

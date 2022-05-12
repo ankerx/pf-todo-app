@@ -50,6 +50,7 @@ function EditTask() {
           placeholder="Name of the task"
           onChange={handleChange}
           value={newValue ?? ""}
+          required
         />
         <div className="w-full">
           <button

@@ -58,12 +58,14 @@ function LoginForm({ setIsLoggedIn }) {
           onChange={handleChange}
           value={formData.password}
           name="password"
+          required
         />
         <input
           type="button"
           className="py-2 px-4 bg-cyan-500 w-full mt-3"
           value="Login"
           onClick={handleLogin}
+          required
         />
 
         <button className="py-2 px-4 bg-cyan-500 w-full mt-3">
