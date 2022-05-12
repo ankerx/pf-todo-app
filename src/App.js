@@ -1,24 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import AddTask from "./pages/AddTask";
+import EditTask from "./pages/EditTask";
 
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 function App() {
+  const [token, setToken] = useState();
+  const access = sessionStorage.getItem("token");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState();
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    setToken(sessionStorage.getItem("token"));
+  }, [token]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="flex flex-col items-center justify-center">
+        <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        <Routes>
+          <Route
+            path="/"
+            element={<Home isLoggedIn={isLoggedIn} token={token} />}
+          />
+          <Route
+            path="register"
+            element={
+              <Register
+                setToken={setToken}
+                user={user}
+                setUser={setUser}
+                setIsLoggedIn={setIsLoggedIn}
+              />
+            }
+          />
+          <Route
+            path="log-in"
+            element={<Login setIsLoggedIn={setIsLoggedIn} token={token} />}
+          />
+          <Route
+            path="addTask"
+            element={
+              <AddTask token={token} value={value} setValue={setValue} />
+            }
+          />
+          <Route path="/edit/:id" element={<EditTask value={value} />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
