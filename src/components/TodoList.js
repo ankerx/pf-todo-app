@@ -9,13 +9,16 @@ function TodoList() {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  // console.log(todos);
+
   useEffect(() => {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
     axios
       .get(URL, config)
       .then((res) => setTodos(res.data))
       .catch((err) => console.log(err));
-  }, [todos]);
+  }, [todos, token]);
 
   const handleDelete = (id) => {
     axios
@@ -41,12 +44,15 @@ function TodoList() {
         todos.map((el, index) => (
           <div
             key={index}
-            className="flex justify-between w-full border border-y-gray-300"
+            className="flex justify-between w-full border border-y-gray-300 items-center"
           >
             <p>{el.name}</p>
-            <div>
-              <Link to={`edit/${el._id}`}>Edit </Link>
+            <div className="text-white">
+              <button className="bg-cyan-700 py-1 px-2 mr-2">
+                <Link to={`edit/${el._id}`}>Edit</Link>
+              </button>
               <button
+                className="bg-red-500 py-1 px-2"
                 onClick={() => {
                   handleDelete(el._id);
                 }}

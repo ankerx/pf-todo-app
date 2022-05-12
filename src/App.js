@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 function App() {
   const [token, setToken] = useState();
-  const access = sessionStorage.getItem("token");
+  // const access = sessionStorage.getItem("token");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState();
   const [value, setValue] = useState("");
@@ -25,7 +25,13 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Home isLoggedIn={isLoggedIn} token={token} />}
+            element={
+              <Home
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+                token={token}
+              />
+            }
           />
           <Route
             path="register"
