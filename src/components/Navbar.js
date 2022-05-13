@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 
 function Navbar({ isLoggedIn, setIsLoggedIn }) {
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    sessionStorage.clear();
+  };
   return (
     <>
       <nav className="flex text-white p-3 bg-cyan-700 w-full">
@@ -20,7 +24,7 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
           )}
           {isLoggedIn && (
             <li className="mr-5">
-              <button onClick={() => setIsLoggedIn(false)}>Logout</button>
+              <button onClick={handleLogout}>Logout</button>
             </li>
           )}
         </ul>

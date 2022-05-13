@@ -1,9 +1,9 @@
-import CreateTask from "../components/CreateTask";
+import CreateTask from "../modules/Task/CreateTask";
 
-function AddTask({ token, setValue, value }) {
+function AddTask({ setValue, value }) {
   return (
     <div className="w-full flex justify-center">
-      <CreateTask token={token} value={value} setValue={setValue} />
+      <CreateTask value={value} setValue={setValue} />
     </div>
   );
 }

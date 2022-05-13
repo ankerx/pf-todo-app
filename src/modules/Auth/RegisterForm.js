@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-function RegisterForm({ user, setUser, setIsLoggedIn, setToken }) {
+import AuthAxios from "./AuthAxios";
+function RegisterForm() {
   const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState({});
 
@@ -10,7 +10,6 @@ function RegisterForm({ user, setUser, setIsLoggedIn, setToken }) {
     password: "",
     confirmedPassword: "",
   });
-  const URL = "http://localhost:8080/user/sign-up";
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -48,9 +47,7 @@ function RegisterForm({ user, setUser, setIsLoggedIn, setToken }) {
       formData.password === formData.confirmedPassword
     ) {
       try {
-        const res = await axios.post(URL, userObject);
-        setUser(res.data.user);
-        setToken(res.data.accessToken);
+        const res = await AuthAxios.post(`/user/sing-up`, userObject);
         sessionStorage.setItem("token", res.data.accessToken);
         navigate("/log-in");
       } catch (error) {

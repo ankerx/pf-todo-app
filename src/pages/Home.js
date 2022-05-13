@@ -1,4 +1,4 @@
-import TodoList from "../components/TodoList";
+import TodoList from "../modules/Task/TodoList";
 import Login from "./Login";
 
 function Home({ setIsLoggedIn, isLoggedIn, token }) {

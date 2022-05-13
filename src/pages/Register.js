@@ -1,14 +1,9 @@
-import RegisterForm from "../components/RegisterForm";
+import RegisterForm from "../modules/Auth/RegisterForm";
 
-function Register({ user, setUser, setIsLoggedIn, setToken }) {
+function Register({ setUser }) {
   return (
     <>
-      <RegisterForm
-        user={user}
-        setUser={setUser}
-        setIsLoggedIn={setIsLoggedIn}
-        setToken={setToken}
-      />
+      <RegisterForm setUser={setUser} />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import AuthAxios from "../AuthAxios";
+import AuthAxios from "../Auth/AuthAxios";
 function TodoList() {
   const [todos, setTodos] = useState([]);
 
@@ -8,7 +8,8 @@ function TodoList() {
     AuthAxios.get("/task")
       .then((res) => setTodos(res.data))
       .catch((err) => console.log(err));
-  }, [todos]);
+  }, []); // <--- ????
+  // ||| ///
 
   const handleDelete = (id) => {
     AuthAxios.delete(`/task/${id}`).then((res) =>

@@ -10,7 +10,6 @@ import Register from "./pages/Register";
 function App() {
   const [token, setToken] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(token ? true : false);
-  const [user, setUser] = useState();
   const [value, setValue] = useState("");
 
   useEffect(() => {
@@ -32,26 +31,14 @@ function App() {
               />
             }
           />
-          <Route
-            path="register"
-            element={
-              <Register
-                setToken={setToken}
-                user={user}
-                setUser={setUser}
-                setIsLoggedIn={setIsLoggedIn}
-              />
-            }
-          />
+          <Route path="register" element={<Register />} />
           <Route
             path="log-in"
-            element={<Login setIsLoggedIn={setIsLoggedIn} token={token} />}
+            element={<Login setIsLoggedIn={setIsLoggedIn} />}
           />
           <Route
             path="addTask"
-            element={
-              <AddTask token={token} value={value} setValue={setValue} />
-            }
+            element={<AddTask value={value} setValue={setValue} />}
           />
           <Route path="/edit/:id" element={<EditTask value={value} />} />
         </Routes>

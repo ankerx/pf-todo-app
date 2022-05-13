@@ -1,21 +1,31 @@
-import { useNavigate } from "react-router-dom";
-import AuthAxios from "../AuthAxios";
-function CreateTask({ value, setValue }) {
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import AuthAxios from "../Auth/AuthAxios";
+
+function TaskEdit() {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const [todo, setTodo] = useState({});
+  const [newValue, setNewValue] = useState("");
+
+  useEffect(() => {
+    AuthAxios.get(`/task/${id}`)
+      .then((res) => setTodo(res.data))
+      .catch((err) => console.log(err));
+
+    setNewValue(todo.name);
+  }, [todo.name, id]);
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setNewValue(event.target.value);
   };
-
-  const handleSubmit = (e) => {
-    AuthAxios.post("/task", {
-      name: value,
+  const handleUpdate = () => {
+    AuthAxios.put(`/task/${id}`, {
+      name: newValue,
     })
       .then((res) => console.log(res.data))
       .then(navigate("/"))
       .catch((err) => console.log(err));
-
-    setValue("");
   };
 
   return (
@@ -26,14 +36,13 @@ function CreateTask({ value, setValue }) {
           className="bg-white border border-black w-full p-1 mt-1 "
           type="text"
           placeholder="Name of the task"
-          value={value}
           onChange={handleChange}
+          value={newValue ?? ""}
           required
         />
-
         <div className="w-full">
           <button
-            onClick={handleSubmit}
+            onClick={handleUpdate}
             className="py-2 px-4 bg-cyan-700 w-full mt-3 text-white"
           >
             Save
@@ -51,4 +60,4 @@ function CreateTask({ value, setValue }) {
   );
 }
 
-export default CreateTask;
+export default TaskEdit;

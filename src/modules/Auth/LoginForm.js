@@ -1,19 +1,14 @@
 import { useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import AuthAxios from "./AuthAxios";
 
 function LoginForm({ setIsLoggedIn }) {
   let navigate = useNavigate();
-  const token = sessionStorage.getItem("token");
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const URL = "http://localhost:8080/user/log-in";
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -23,16 +18,11 @@ function LoginForm({ setIsLoggedIn }) {
     });
   };
   const handleLogin = () => {
-    axios
-      .post(
-        URL,
-        {
-          email: formData.email,
-          password: formData.password,
-        },
-        config
-      )
-      .then((res) => console.log(res))
+    AuthAxios.post(`/user/log-in`, {
+      email: formData.email,
+      password: formData.password,
+    })
+      .then((res) => sessionStorage.setItem("token", res.data.accessToken))
       .then(setIsLoggedIn(true))
       .then(navigate("/"))
       .catch((err) => console.log(err));
@@ -62,17 +52,16 @@ function LoginForm({ setIsLoggedIn }) {
         />
         <input
           type="button"
-          className="py-2 px-4 bg-cyan-500 w-full mt-3"
+          className="py-2 px-4 bg-cyan-700 text-white w-full mt-3"
           value="Login"
           onClick={handleLogin}
           required
         />
 
-        <button className="py-2 px-4 bg-cyan-500 w-full mt-3">
+        <button className="py-2 px-4 bg-cyan-700 text-white w-full mt-3">
           <Link to="/register"> Register</Link>
         </button>
       </form>
-      <div> aaaa</div>
     </div>
   );
 }
