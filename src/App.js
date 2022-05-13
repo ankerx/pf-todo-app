@@ -9,8 +9,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 function App() {
   const [token, setToken] = useState();
-  // const access = sessionStorage.getItem("token");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(token ? true : false);
   const [user, setUser] = useState();
   const [value, setValue] = useState("");
 

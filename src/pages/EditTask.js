@@ -1,41 +1,27 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import AuthAxios from "../AuthAxios";
 function EditTask() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [todo, setTodo] = useState({});
   const [newValue, setNewValue] = useState("");
-  const URL = `http://localhost:8080/task/${id}`;
-  const token = sessionStorage.getItem("token");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-
+  console.log(newValue);
   useEffect(() => {
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    axios
-      .get(URL, config)
+    AuthAxios.get(`/task/${id}`)
       .then((res) => setTodo(res.data))
       .catch((err) => console.log(err));
 
     setNewValue(todo.name);
-  }, [URL, token, todo.name]);
+  }, [todo.name, id]);
 
   const handleChange = (event) => {
     setNewValue(event.target.value);
   };
-  const handleUpdate = (id) => {
-    axios
-      .put(
-        URL,
-        {
-          name: newValue,
-        },
-        config
-      )
+  const handleUpdate = () => {
+    AuthAxios.put(`/task/${id}`, {
+      name: newValue,
+    })
       .then((res) => console.log(res.data))
       .then(navigate("/"))
       .catch((err) => console.log(err));

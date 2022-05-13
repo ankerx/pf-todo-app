@@ -1,29 +1,19 @@
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useEffect, useState } from "react";
-
+import AuthAxios from "../AuthAxios";
 function TodoList() {
   const [todos, setTodos] = useState([]);
-  const URL = "http://localhost:8080/task";
-  const token = sessionStorage.getItem("token");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
 
   useEffect(() => {
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    axios
-      .get(URL, config)
+    AuthAxios.get("/task")
       .then((res) => setTodos(res.data))
       .catch((err) => console.log(err));
-  }, [todos, token]);
+  }, [todos]);
 
   const handleDelete = (id) => {
-    axios
-      .delete(`${URL}/${id}`, config)
-      .then((res) => console.log("Task deleted", res));
+    AuthAxios.delete(`/task/${id}`).then((res) =>
+      console.log("Task deleted", res)
+    );
   };
 
   return (

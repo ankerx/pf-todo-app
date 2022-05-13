@@ -1,25 +1,16 @@
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-function CreateTask({ token, value, setValue }) {
+import AuthAxios from "../AuthAxios";
+function CreateTask({ value, setValue }) {
   const navigate = useNavigate();
-  const URL = "http://localhost:8080/task";
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
 
   const handleSubmit = (e) => {
-    axios
-      .post(
-        URL,
-        {
-          name: value,
-        },
-        config
-      )
+    AuthAxios.post("/task", {
+      name: value,
+    })
       .then((res) => console.log(res.data))
       .then(navigate("/"))
       .catch((err) => console.log(err));
