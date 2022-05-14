@@ -14,6 +14,7 @@ function App() {
   // const [authToken, setAuthToken] = useSessionStorage("authToken", "");
   useEffect(() => {
     setToken(sessionStorage.getItem("token"));
+    console.log(token);
   }, [token]);
 
   return (
