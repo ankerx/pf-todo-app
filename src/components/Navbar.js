@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Navbar({ isLoggedIn, setIsLoggedIn }) {
+function Navbar({ isLoggedIn, setIsLoggedIn, token }) {
   const handleLogout = () => {
     setIsLoggedIn(false);
     sessionStorage.clear();
@@ -17,9 +17,6 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
               <li className="mr-5">
                 <Link to="log-in">Login</Link>
               </li>
-              {/* <li>
-                <Link to="register">Register</Link>
-              </li> */}
             </>
           )}
           {isLoggedIn && (

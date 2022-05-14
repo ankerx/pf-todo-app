@@ -1,15 +1,9 @@
 import TodoList from "../modules/Task/TodoList";
 import Login from "./Login";
 
-function Home({ setIsLoggedIn, isLoggedIn, token }) {
+function Home({ setIsLoggedIn, isLoggedIn }) {
   return (
-    <>
-      {isLoggedIn ? (
-        <TodoList token={token} />
-      ) : (
-        <Login setIsLoggedIn={setIsLoggedIn} />
-      )}
-    </>
+    <>{isLoggedIn ? <TodoList /> : <Login setIsLoggedIn={setIsLoggedIn} />}</>
   );
 }
 

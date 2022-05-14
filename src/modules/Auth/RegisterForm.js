@@ -47,7 +47,7 @@ function RegisterForm() {
       formData.password === formData.confirmedPassword
     ) {
       try {
-        const res = await AuthAxios.post(`/user/sing-up`, userObject);
+        const res = await AuthAxios.post(`/user/sign-up`, userObject);
         sessionStorage.setItem("token", res.data.accessToken);
         navigate("/log-in");
       } catch (error) {
