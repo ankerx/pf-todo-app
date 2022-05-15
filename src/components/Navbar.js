@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Navbar({ isLoggedIn, setIsLoggedIn, token }) {
+function Navbar({ setIsLoggedIn, isLoggedIn }) {
   const handleLogout = () => {
     setIsLoggedIn(false);
     sessionStorage.clear();

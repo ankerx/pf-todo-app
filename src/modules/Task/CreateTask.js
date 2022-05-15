@@ -7,7 +7,7 @@ function CreateTask({ value, setValue }) {
     setValue(event.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     AuthAxios.post("/task", {
       name: value,
     })

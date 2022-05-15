@@ -20,16 +20,16 @@ function App() {
   return (
     <BrowserRouter>
       <div className="flex flex-col items-center justify-center">
-        <Navbar
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-          token={token}
-        />
+        <Navbar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
         <Routes>
           <Route
             path="/"
             element={
-              <Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+              <Home
+                token={token}
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+              />
             }
           />
           <Route path="register" element={<Register />} />

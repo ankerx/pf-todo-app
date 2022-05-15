@@ -4,17 +4,19 @@ import AuthAxios from "../Auth/AuthAxios";
 function TodoList() {
   const [todos, setTodos] = useState([]);
 
-  useEffect(() => {
+  const fetchTodos = () => {
     AuthAxios.get("/task")
       .then((res) => setTodos(res.data))
       .catch((err) => console.log(err));
-  }, []); // <--- ????
-  // ||| ///
+  };
+  useEffect(() => {
+    fetchTodos();
+  }, []);
 
   const handleDelete = (id) => {
-    AuthAxios.delete(`/task/${id}`).then((res) =>
-      console.log("Task deleted", res)
-    );
+    AuthAxios.delete(`/task/${id}`)
+      .then((res) => console.log("Task deleted", res))
+      .then(setTodos(todos.filter((todo) => todo._id !== id)));
   };
 
   return (
