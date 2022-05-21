@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import AuthAxios from "../AuthAxios";
+import AuthAxios from "../../../core/api/request";
 function RegisterForm() {
   const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState({});

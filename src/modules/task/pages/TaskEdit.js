@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Input from "../../../core/components/Input";
-import AuthAxios from "../../auth/AuthAxios";
+import AuthAxios from "../../../core/api/request";
 
 function TaskEdit() {
   const navigate = useNavigate();

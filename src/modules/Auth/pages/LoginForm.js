@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import AuthAxios from "../AuthAxios";
+import AuthAxios from "../../../core/api/request";
 
 function LoginForm({ setIsLoggedIn }) {
   const navigate = useNavigate();
