@@ -1,31 +1,31 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { request } from "../../../core/api/request";
 import AuthAxios from "../../../core/api/request";
 import { taskApi } from "../api/taskApi";
 function TodoList() {
   const [todos, setTodos] = useState([]);
 
   const fetchTodos = () => {
-    AuthAxios.get("/task")
-      .then((res) => setTodos(res.data))
+    taskApi
+      .getAllTasks()
+      .then((res) => setTodos(res))
       .catch((err) => console.log(err));
   };
-  const test = async () => {
-    return taskApi.getTasks().then((res) => console.log(res));
-  };
-  useEffect(() => {
-    request("/task");
-    test();
-  }, []);
   useEffect(() => {
     fetchTodos();
   }, []);
 
   const handleDelete = (id) => {
+    // taskApi
+    //   .delete(id)
+    //   .then((res) => {
+    //     return res;
+    //   })
+
     AuthAxios.delete(`/task/${id}`)
       .then((res) => console.log("Task deleted", res))
-      .then(setTodos(todos.filter((todo) => todo._id !== id)));
+      .then(setTodos(todos.filter((todo) => todo._id !== id)))
+      .catch((err) => console.log(err));
   };
 
   return (

@@ -15,6 +15,10 @@ export default AuthAxios;
 const instance = axios.create({
   baseURL: configData.SERVER_URL,
 });
+const logger = (data, url) => {
+  console.log(url, `\n\t status: ${data.status}`, `\n\t payload: `, data.data);
+  return data.data;
+};
 export const request = async (url) => {
   let req = {
     url: url,
@@ -28,6 +32,6 @@ export const request = async (url) => {
 
   return instance
     .request(req)
-    .then((data) => console.log(data))
+    .then((data) => logger(data, url))
     .catch((err) => console.log(err));
 };

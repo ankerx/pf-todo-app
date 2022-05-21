@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./core/components/Navbar";
-// import Home from "./pages/Home";
+import ProtectedRoute from "./core/components/ProtectedRoute";
+import RedirectRoute from "./core/components/RedirectRoute";
 import LoginForm from "./modules/auth/pages/LoginForm";
 import RegisterForm from "./modules/auth/pages/RegisterForm";
 import Loading from "./core/components/Loading";
@@ -35,10 +36,28 @@ function App() {
             <Route path="register" element={<RegisterForm />} />
             <Route
               path="log-in"
-              element={<LoginForm setIsLoggedIn={setIsLoggedIn} />}
+              element={
+                <RedirectRoute isLoggedIn={isLoggedIn}>
+                  <LoginForm setIsLoggedIn={setIsLoggedIn} />
+                </RedirectRoute>
+              }
             />
-            <Route path="addTask" element={<CreateTask />} />
-            <Route path="/edit/:id" element={<EditTask />} />
+            <Route
+              path="addTask"
+              element={
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <CreateTask />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/edit/:id"
+              element={
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <EditTask />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </React.Suspense>
       </div>
