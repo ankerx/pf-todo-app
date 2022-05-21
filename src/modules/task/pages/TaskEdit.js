@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import Input from "../../../core/components/Input";
+import Input from "../components/Input";
 import AuthAxios from "../../../core/api/request";
 
 function TaskEdit() {

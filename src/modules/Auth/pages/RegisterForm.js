@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import AuthAxios from "../../../core/api/request";
+import Input from "./components/Input";
 function RegisterForm() {
   const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState({});
@@ -61,39 +62,32 @@ function RegisterForm() {
   return (
     <div className=" flex items-center justify-center">
       <form className="flex flex-col items-center max-w-sm ">
-        <label>Email</label>
-        <input
-          className="bg-white border border-black "
-          type="email"
-          placeholder="email"
+        <Input
+          label="Email"
+          type="text"
           onChange={handleChange}
           value={formData.email}
-          name="email"
-          required
+          name="text"
+          placeholder="Email"
         />
         {formErrors.email && (
           <p className="text-red-500 text-sm">{formErrors.email}</p>
         )}
-        <label>Password</label>
-        <input
-          className="bg-white border border-black "
+        <Input
+          label="Password"
           type="password"
-          placeholder="password"
           onChange={handleChange}
           value={formData.password}
           name="password"
-          required
+          placeholder="Password"
         />
-
-        <label>Confirm password</label>
-        <input
-          className="bg-white border border-black "
+        <Input
+          label="Confirm assword"
           type="password"
-          placeholder="password"
           onChange={handleChange}
           value={formData.confirmedPassword}
           name="confirmedPassword"
-          required
+          placeholder="Confirm password"
         />
         {formErrors.password && (
           <p className="text-red-500 text-sm">{formErrors.password}</p>

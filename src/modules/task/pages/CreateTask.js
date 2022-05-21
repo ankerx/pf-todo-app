@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Input from "../../../core/components/Input";
+import Input from "../components/Input";
 import AuthAxios from "../../../core/api/request";
 function CreateTask() {
   const navigate = useNavigate();

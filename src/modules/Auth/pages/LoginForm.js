@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthAxios from "../../../core/api/request";
-
+import Input from "./components/Input";
 function LoginForm({ setIsLoggedIn }) {
   const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState({});
@@ -32,7 +32,8 @@ function LoginForm({ setIsLoggedIn }) {
     return errors;
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     setFormErrors(validate(formData));
     if (
       Object.keys(formErrors).length === 0 &&
@@ -58,12 +59,14 @@ function LoginForm({ setIsLoggedIn }) {
 
   return (
     <div className=" flex items-center justify-center">
-      <form className="flex flex-col items-center max-w-sm ">
-        <label>Email</label>
-        <input
-          className="bg-white border border-black "
+      <form
+        onSubmit={handleLogin}
+        className="flex flex-col items-center max-w-sm "
+      >
+        <Input
+          label="Email"
           type="email"
-          placeholder="email"
+          placeholder="Email"
           onChange={handleChange}
           value={formData.email}
           name="email"
@@ -71,24 +74,22 @@ function LoginForm({ setIsLoggedIn }) {
         {formErrors.email && (
           <p className="text-red-500 text-sm">{formErrors.email}</p>
         )}
-        <label>Password</label>
-        <input
-          className="bg-white border border-black "
+        <Input
+          label="Password"
           type="password"
-          placeholder="password"
           onChange={handleChange}
           value={formData.password}
           name="password"
+          placeholder="Password"
         />
+
         {formErrors.password && (
           <p className="text-red-500 text-sm">{formErrors.password}</p>
         )}
         <input
-          type="button"
+          type="submit"
           className="py-2 px-4 bg-cyan-700 text-white w-full mt-3"
           value="Login"
-          onClick={handleLogin}
-          required
         />
 
         <button className="py-2 px-4 bg-cyan-700 text-white w-full mt-3">

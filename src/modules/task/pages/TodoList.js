@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { request } from "../../../core/api/request";
 import AuthAxios from "../../../core/api/request";
+import { taskApi } from "../api/taskApi";
 function TodoList() {
   const [todos, setTodos] = useState([]);
 
@@ -9,6 +11,13 @@ function TodoList() {
       .then((res) => setTodos(res.data))
       .catch((err) => console.log(err));
   };
+  const test = async () => {
+    return taskApi.getTasks().then((res) => console.log(res));
+  };
+  useEffect(() => {
+    request("/task");
+    test();
+  }, []);
   useEffect(() => {
     fetchTodos();
   }, []);
