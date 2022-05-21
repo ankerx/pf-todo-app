@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import AuthAxios from "../Auth/AuthAxios";
+import Input from "../../../core/components/Input";
+import AuthAxios from "../../auth/AuthAxios";
 
 function TaskEdit() {
   const navigate = useNavigate();
@@ -30,32 +31,11 @@ function TaskEdit() {
 
   return (
     <div className="w-96">
-      <form className="mt-3 flex flex-col ">
-        <label>Name</label>
-        <input
-          className="bg-white border border-black w-full p-1 mt-1 "
-          type="text"
-          placeholder="Name of the task"
-          onChange={handleChange}
-          value={newValue ?? ""}
-          required
-        />
-        <div className="w-full">
-          <button
-            onClick={handleUpdate}
-            className="py-2 px-4 bg-cyan-700 w-full mt-3 text-white"
-          >
-            Save
-          </button>
-
-          <button
-            onClick={() => navigate("/")}
-            className="py-2 px-4 border border-black w-full mt-1"
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
+      <Input
+        value={newValue ?? ""}
+        onChange={handleChange}
+        onClick={handleUpdate}
+      />
     </div>
   );
 }

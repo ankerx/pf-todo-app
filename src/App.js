@@ -1,17 +1,16 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import AddTask from "./pages/AddTask";
-import EditTask from "./pages/EditTask";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Navbar from "./core/components/Navbar";
+// import Home from "./pages/Home";
+import LoginForm from "./modules/auth/pages/LoginForm";
+import RegisterForm from "./modules/auth/pages/RegisterForm";
+import Loading from "./core/components/Loading";
+const CreateTask = React.lazy(() => import("./modules/task/pages/CreateTask"));
+const EditTask = React.lazy(() => import("./modules/task/pages/TaskEdit"));
+const Home = React.lazy(() => import("./pages/Home"));
 function App() {
   const [token, setToken] = useState(sessionStorage.getItem("token") || "");
   const [isLoggedIn, setIsLoggedIn] = useState(token ? true : false);
-  const [value, setValue] = useState("");
-
-  // const [authToken, setAuthToken] = useSessionStorage("authToken", "");
   useEffect(() => {
     setToken(sessionStorage.getItem("token"));
     console.log(token);
@@ -21,28 +20,27 @@ function App() {
     <BrowserRouter>
       <div className="flex flex-col items-center justify-center">
         <Navbar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                token={token}
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-              />
-            }
-          />
-          <Route path="register" element={<Register />} />
-          <Route
-            path="log-in"
-            element={<Login setIsLoggedIn={setIsLoggedIn} />}
-          />
-          <Route
-            path="addTask"
-            element={<AddTask value={value} setValue={setValue} />}
-          />
-          <Route path="/edit/:id" element={<EditTask value={value} />} />
-        </Routes>
+        <React.Suspense fallback={<Loading />}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  token={token}
+                  isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
+                />
+              }
+            />
+            <Route path="register" element={<RegisterForm />} />
+            <Route
+              path="log-in"
+              element={<LoginForm setIsLoggedIn={setIsLoggedIn} />}
+            />
+            <Route path="addTask" element={<CreateTask />} />
+            <Route path="/edit/:id" element={<EditTask />} />
+          </Routes>
+        </React.Suspense>
       </div>
     </BrowserRouter>
   );

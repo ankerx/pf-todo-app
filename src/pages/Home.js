@@ -1,9 +1,11 @@
-import TodoList from "../modules/Task/TodoList";
-import Login from "./Login";
+import LoginForm from "../modules/auth/pages/LoginForm";
+import TodoList from "../modules/task/pages/TodoList";
 
 function Home({ setIsLoggedIn, isLoggedIn }) {
   return (
-    <>{isLoggedIn ? <TodoList /> : <Login setIsLoggedIn={setIsLoggedIn} />}</>
+    <>
+      {isLoggedIn ? <TodoList /> : <LoginForm setIsLoggedIn={setIsLoggedIn} />}
+    </>
   );
 }
 

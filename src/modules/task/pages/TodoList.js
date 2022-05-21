@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import AuthAxios from "../Auth/AuthAxios";
+import AuthAxios from "../../auth/AuthAxios";
 function TodoList() {
   const [todos, setTodos] = useState([]);
 
@@ -34,9 +34,9 @@ function TodoList() {
       </div>
 
       {todos.length > 0 &&
-        todos.map((el, index) => (
+        todos.map((el) => (
           <div
-            key={index}
+            key={el._id}
             className="flex justify-between w-full border border-y-gray-300 items-center"
           >
             <p>{el.name}</p>

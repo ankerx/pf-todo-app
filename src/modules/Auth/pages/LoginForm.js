@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import AuthAxios from "./AuthAxios";
-function RegisterForm() {
+import { Link, useNavigate } from "react-router-dom";
+import AuthAxios from "../AuthAxios";
+
+function LoginForm({ setIsLoggedIn }) {
   const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState({});
-
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    confirmedPassword: "",
   });
 
   const handleChange = (event) => {
@@ -27,29 +26,27 @@ function RegisterForm() {
       errors.email = "Email address is invalid";
     }
 
-    if (formData.password !== formData.confirmedPassword) {
-      errors.password = "Passwords not match!";
+    if (formData.password.length === 0) {
+      errors.password = "Passwords is required!";
     }
     return errors;
   };
 
-  const createUser = async () => {
-    const userObject = {
-      email: formData.email,
-      password: formData.password,
-    };
+  const handleLogin = async () => {
     setFormErrors(validate(formData));
     if (
       Object.keys(formErrors).length === 0 &&
       formData.email.length !== 0 &&
-      formData.password.length !== 0 &&
-      formData.confirmedPassword.length !== 0 &&
-      formData.password === formData.confirmedPassword
+      formData.password.length !== 0
     ) {
       try {
-        const res = await AuthAxios.post(`/user/sign-up`, userObject);
+        const res = await AuthAxios.post(`/user/log-in`, {
+          email: formData.email,
+          password: formData.password,
+        });
         sessionStorage.setItem("token", res.data.accessToken);
-        navigate("/log-in");
+        setIsLoggedIn(true);
+        navigate("/");
       } catch (error) {
         console.log(error);
       }
@@ -58,6 +55,7 @@ function RegisterForm() {
       return;
     }
   };
+
   return (
     <div className=" flex items-center justify-center">
       <form className="flex flex-col items-center max-w-sm ">
@@ -69,7 +67,6 @@ function RegisterForm() {
           onChange={handleChange}
           value={formData.email}
           name="email"
-          required
         />
         {formErrors.email && (
           <p className="text-red-500 text-sm">{formErrors.email}</p>
@@ -82,34 +79,24 @@ function RegisterForm() {
           onChange={handleChange}
           value={formData.password}
           name="password"
-          required
-        />
-
-        <label>Confirm password</label>
-        <input
-          className="bg-white border border-black "
-          type="password"
-          placeholder="password"
-          onChange={handleChange}
-          value={formData.confirmedPassword}
-          name="confirmedPassword"
-          required
         />
         {formErrors.password && (
           <p className="text-red-500 text-sm">{formErrors.password}</p>
         )}
         <input
           type="button"
-          className="py-2 px-4 bg-cyan-700 text-white  w-full mt-3"
-          value="Register"
-          onClick={createUser}
+          className="py-2 px-4 bg-cyan-700 text-white w-full mt-3"
+          value="Login"
+          onClick={handleLogin}
+          required
         />
-        <button className="py-2 px-4 bg-cyan-700 text-white  w-full mt-3">
-          <Link to="/log-in"> Login</Link>
+
+        <button className="py-2 px-4 bg-cyan-700 text-white w-full mt-3">
+          <Link to="/register"> Register</Link>
         </button>
       </form>
     </div>
   );
 }
 
-export default RegisterForm;
+export default LoginForm;
