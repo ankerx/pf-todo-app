@@ -16,14 +16,11 @@ function TodoList() {
   }, []);
 
   const handleDelete = (id) => {
-    // taskApi
-    //   .delete(id)
-    //   .then((res) => {
-    //     return res;
-    //   })
-
-    AuthAxios.delete(`/task/${id}`)
-      .then((res) => console.log("Task deleted", res))
+    taskApi
+      .delete(id)
+      .then((res) => {
+        return res;
+      })
       .then(setTodos(todos.filter((todo) => todo._id !== id)))
       .catch((err) => console.log(err));
   };

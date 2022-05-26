@@ -11,20 +11,13 @@ function CreateTask() {
   };
 
   const handleSubmit = () => {
-    // taskApi
-    //   .create(value)
-    //   .then((res) => {
-    //     return res
-    //   })
-    //   .then(navigate("/"))
-    //   .catch((err) => console.log(err));
-    AuthAxios.post("/task", {
-      name: value,
-    })
-      .then((res) => console.log(res.data))
+    taskApi
+      .create(value)
+      .then((res) => {
+        return res;
+      })
       .then(navigate("/"))
       .catch((err) => console.log(err));
-
     setValue("");
   };
 

@@ -8,7 +8,7 @@ export const taskApi = {
     return api.get(`/task/${id}`);
   },
   create: function (name) {
-    return api.post(`/task`, name);
+    return api.post(`/task`, { name });
   },
   update: function (id, name) {
     return api.put(`/task/${id}`, { name });

@@ -21,19 +21,19 @@ function TaskEdit() {
     setNewValue(event.target.value);
   };
   const handleUpdate = () => {
-    // taskApi
-    //   .update(id, newValue)
-    //   .then((res) => {
-    //     return res;
-    //   })
-    //   .then(navigate("/"))
-    //   .catch((err) => console.log(err));
-    AuthAxios.put(`/task/${id}`, {
-      name: newValue,
-    })
-      .then((res) => console.log(res.data))
+    taskApi
+      .update(id, newValue)
+      .then((res) => {
+        return res;
+      })
       .then(navigate("/"))
       .catch((err) => console.log(err));
+    // AuthAxios.put(`/task/${id}`, {
+    //   name: newValue,
+    // })
+    //   .then((res) => console.log(res.data))
+    //   .then(navigate("/"))
+    //   .catch((err) => console.log(err));
   };
 
   return (
