@@ -1,9 +1,12 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { setLogout } from "../../redux/features/auth/authSlice";
 
-function Navbar({ setIsLoggedIn, isLoggedIn }) {
+function Navbar() {
+  const { user } = useSelector((state) => ({ ...state.auth }));
+  const dispatch = useDispatch();
   const handleLogout = () => {
-    setIsLoggedIn(false);
-    sessionStorage.clear();
+    dispatch(setLogout());
   };
   return (
     <>
@@ -12,14 +15,14 @@ function Navbar({ setIsLoggedIn, isLoggedIn }) {
           <Link to="/">TODO APP</Link>
         </h1>
         <ul className="flex">
-          {!isLoggedIn && (
+          {!user && (
             <>
               <li className="mr-5">
                 <Link to="log-in">Login</Link>
               </li>
             </>
           )}
-          {isLoggedIn && (
+          {user && (
             <li className="mr-5">
               <button onClick={handleLogout}>Logout</button>
             </li>

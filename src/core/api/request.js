@@ -1,14 +1,12 @@
-import { data } from "autoprefixer";
 import axios from "axios";
 import configData from "../../configData.json";
-import { config } from "./config";
-const token = sessionStorage.getItem("token");
-
+const token = window.localStorage.getItem("user");
 console.log(token);
-
 const AuthAxios = axios.create({
   baseURL: configData.SERVER_URL,
-  headers: { Authorization: `Bearer ${token}` },
+  headers: {
+    Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("user"))}`,
+  },
 });
 export default AuthAxios;
 
@@ -31,8 +29,8 @@ export const request = async (_url, _config) => {
   if (!req.headers) {
     req.headers = {};
   }
-  req.headers["Authorization"] = `Bearer ${window.sessionStorage.getItem(
-    "token"
+  req.headers["Authorization"] = `Bearer ${JSON.parse(
+    window.localStorage.getItem("user")
   )}`;
 
   return instance

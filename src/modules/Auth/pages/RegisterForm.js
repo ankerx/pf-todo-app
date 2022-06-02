@@ -49,7 +49,7 @@ function RegisterForm() {
     ) {
       try {
         const res = await AuthAxios.post(`/user/sign-up`, userObject);
-        sessionStorage.setItem("token", res.data.accessToken);
+        window.localStorage.setItem("token", res.data.accessToken);
         navigate("/log-in");
       } catch (error) {
         console.log(error);
@@ -67,7 +67,7 @@ function RegisterForm() {
           type="text"
           onChange={handleChange}
           value={formData.email}
-          name="text"
+          name="email"
           placeholder="Email"
         />
         {formErrors.email && (

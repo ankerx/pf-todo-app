@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
-const RedirectRoute = ({ isLoggedIn, children }) => {
-  if (isLoggedIn) {
+
+const RedirectRoute = ({ user, children }) => {
+  if (user) {
     return <Navigate to="/" replace />;
   }
 

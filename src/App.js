@@ -6,46 +6,38 @@ import RedirectRoute from "./core/components/RedirectRoute";
 import LoginForm from "./modules/auth/pages/LoginForm";
 import RegisterForm from "./modules/auth/pages/RegisterForm";
 import Loading from "./core/components/Loading";
+import { useDispatch } from "react-redux";
+import { setUser } from "./redux/features/auth/authSlice";
 const CreateTask = React.lazy(() => import("./modules/task/pages/CreateTask"));
 const EditTask = React.lazy(() => import("./modules/task/pages/TaskEdit"));
 const Home = React.lazy(() => import("./pages/Home"));
-function App() {
-  const [token, setToken] = useState(sessionStorage.getItem("token") || "");
-  const [isLoggedIn, setIsLoggedIn] = useState(token ? true : false);
+const App = () => {
+  const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
   useEffect(() => {
-    setToken(sessionStorage.getItem("token"));
-    console.log(token);
-  }, [token]);
-
+    dispatch(setUser(user));
+  }, [dispatch, user]);
   return (
     <BrowserRouter>
       <div className="flex flex-col items-center justify-center">
-        <Navbar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
+        <Navbar />
         <React.Suspense fallback={<Loading />}>
           <Routes>
-            <Route
-              path="/"
-              element={
-                <Home
-                  token={token}
-                  isLoggedIn={isLoggedIn}
-                  setIsLoggedIn={setIsLoggedIn}
-                />
-              }
-            />
+            <Route path="/" element={<Home />} />
             <Route path="register" element={<RegisterForm />} />
             <Route
               path="log-in"
               element={
-                <RedirectRoute isLoggedIn={isLoggedIn}>
-                  <LoginForm setIsLoggedIn={setIsLoggedIn} />
+                <RedirectRoute user={user}>
+                  <LoginForm />
                 </RedirectRoute>
               }
             />
             <Route
               path="addTask"
               element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <ProtectedRoute user={user}>
                   <CreateTask />
                 </ProtectedRoute>
               }
@@ -53,7 +45,7 @@ function App() {
             <Route
               path="/edit/:id"
               element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <ProtectedRoute user={user}>
                   <EditTask />
                 </ProtectedRoute>
               }
@@ -63,6 +55,6 @@ function App() {
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

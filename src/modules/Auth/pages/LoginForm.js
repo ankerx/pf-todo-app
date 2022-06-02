@@ -1,8 +1,14 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import AuthAxios from "../../../core/api/request";
+import { login, setUser } from "../../../redux/features/auth/authSlice";
 import Input from "./components/Input";
-function LoginForm({ setIsLoggedIn }) {
+function LoginForm() {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => ({ ...state.auth }));
+  console.log(user);
+
   const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState({});
   const [formData, setFormData] = useState({
@@ -41,12 +47,12 @@ function LoginForm({ setIsLoggedIn }) {
       formData.password.length !== 0
     ) {
       try {
-        const res = await AuthAxios.post(`/user/log-in`, {
-          email: formData.email,
-          password: formData.password,
-        });
-        sessionStorage.setItem("token", res.data.accessToken);
-        setIsLoggedIn(true);
+        dispatch(login(formData));
+        // const res = await AuthAxios.post(`/user/log-in`, {
+        //   email: formData.email,
+        //   password: formData.password,
+        // });
+        // window.localStorage.setItem("token", res.data.accessToken);
         navigate("/");
       } catch (error) {
         console.log(error);

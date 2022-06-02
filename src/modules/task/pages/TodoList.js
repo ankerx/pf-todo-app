@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import AuthAxios from "../../../core/api/request";
 import { taskApi } from "../api/taskApi";
 function TodoList() {
   const [todos, setTodos] = useState([]);
