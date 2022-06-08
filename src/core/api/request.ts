@@ -1,11 +1,12 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import configData from "../../configData.json";
-const token = window.localStorage.getItem("user");
-console.log(token);
+
 const AuthAxios = axios.create({
   baseURL: configData.SERVER_URL,
   headers: {
-    Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("user"))}`,
+    Authorization: `Bearer ${JSON.parse(
+      localStorage.getItem("user") as string
+    )}`,
   },
 });
 export default AuthAxios;
@@ -17,24 +18,27 @@ const instance = axios.create({
     "Content-Type": "application/json",
   },
 });
-const logger = (data, url) => {
+const logger = (data: AxiosResponse, url: string) => {
   console.log(url, `\n\t status: ${data.status}`, `\n\t payload: `, data.data);
   return data.data;
 };
-export const request = async (_url, _config) => {
-  let req = {
+
+export const request = async <T>(
+  _url: string,
+  _config?: AxiosRequestConfig
+) => {
+  const returnedUser = JSON.parse(localStorage.getItem("user") as string);
+  let req: any = {
     url: _url,
     ..._config,
   };
   if (!req.headers) {
     req.headers = {};
   }
-  req.headers["Authorization"] = `Bearer ${JSON.parse(
-    window.localStorage.getItem("user")
-  )}`;
+  req.headers["Authorization"] = `Bearer ${returnedUser}`;
 
   return instance
-    .request(req)
+    .request<T>(req)
     .then((data) => logger(data, _url))
     .catch((err) => console.log(err));
 };

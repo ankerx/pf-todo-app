@@ -1,4 +1,13 @@
-function Input(props) {
+interface Props {
+  label: string;
+  type: string;
+  placeholder: string;
+  value: string | number;
+  name: string;
+  onChange:(e: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+export const Input: React.FC<Props> = (props) => {
   return (
     <>
       <label>{props.label}</label>
@@ -14,4 +23,4 @@ function Input(props) {
   );
 }
 
-export default Input;
+

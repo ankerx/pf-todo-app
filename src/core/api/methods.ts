@@ -1,13 +1,13 @@
 import { request } from "./request";
 
 export const api = {
-  get: async function (url) {
+  get: async function (url: string) {
     return request(url)
       .then((data) => data)
       .catch((err) => err);
   },
 
-  post: async function (url, payload) {
+  post: async function (url: string, payload: any) {
     return request(url, {
       method: "POST",
       data: payload,
@@ -15,7 +15,7 @@ export const api = {
       .then((data) => data)
       .catch((err) => err);
   },
-  put: async function (url, payload) {
+  put: async function (url: string, payload: any) {
     return request(url, {
       method: "PUT",
       data: payload,
@@ -23,7 +23,7 @@ export const api = {
       .then((data) => data)
       .catch((err) => err);
   },
-  delete: async function (url) {
+  delete: async function (url: string) {
     return request(url, { method: "DELETE" })
       .then((data) => data)
       .catch((err) => err);

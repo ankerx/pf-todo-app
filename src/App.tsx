@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, FC } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./core/components/Navbar";
 import ProtectedRoute from "./core/components/ProtectedRoute";
 import RedirectRoute from "./core/components/RedirectRoute";
 import LoginForm from "./modules/auth/pages/LoginForm";
 import RegisterForm from "./modules/auth/pages/RegisterForm";
-import Loading from "./core/components/Loading";
+import { Loading } from "./core/components/Loading";
 import { useDispatch } from "react-redux";
 import { setUser } from "./redux/features/auth/authSlice";
-const CreateTask = React.lazy(() => import("./modules/task/pages/CreateTask"));
+const CreateTask = React.lazy(() =>
+  import("./modules/task/pages/CreateTask")
+);
 const EditTask = React.lazy(() => import("./modules/task/pages/TaskEdit"));
 const Home = React.lazy(() => import("./pages/Home"));
-const App = () => {
+const App: FC = () => {
   const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user: string = JSON.parse(localStorage.getItem("user")!);
   console.log(user);
   useEffect(() => {
     dispatch(setUser(user));

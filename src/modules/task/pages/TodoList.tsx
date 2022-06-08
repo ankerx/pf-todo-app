@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { taskApi } from "../api/taskApi";
 function TodoList() {
-  const [todos, setTodos] = useState([]);
-
+  const [todos, setTodos] = useState<[]>([]);
+  console.log(todos)
   const fetchTodos = () => {
     taskApi
       .getAllTasks()
@@ -14,7 +14,7 @@ function TodoList() {
     fetchTodos();
   }, []);
 
-  const handleDelete = (id) => {
+  const handleDelete = (id:string) => {
     taskApi
       .delete(id)
       .then((res) => {

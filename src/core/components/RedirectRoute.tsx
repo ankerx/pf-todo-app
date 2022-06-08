@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
-
-const RedirectRoute = ({ user, children }) => {
+import {RoutProps} from "../../Interfaces"
+const RedirectRoute: React.FC<RoutProps> = ({ user, children }) => {
   if (user) {
     return <Navigate to="/" replace />;
   }

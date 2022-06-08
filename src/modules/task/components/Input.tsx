@@ -1,10 +1,17 @@
+import React from "react";
 import { useNavigate } from "react-router";
-function Input(props) {
+
+interface Props {
+  value: string | number
+  onClick: React.MouseEventHandler<HTMLButtonElement>
+  onChange:(e: React.ChangeEvent<HTMLInputElement>) => void
+
+}
+export const Input: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const onCancel = () => {
     navigate("/");
   };
-
   return (
     <form className="mt-3 flex flex-col ">
       <label>Name</label>
@@ -36,4 +43,4 @@ function Input(props) {
   );
 }
 
-export default Input;
+

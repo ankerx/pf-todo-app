@@ -1,4 +1,4 @@
-function Loading() {
+export const Loading = () => {
   return (
     <div>
       Loading...
@@ -22,4 +22,4 @@ function Loading() {
   );
 }
 
-export default Loading;
+

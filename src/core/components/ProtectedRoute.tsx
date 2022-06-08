@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
+import {RoutProps} from "../../Interfaces"
 
-const ProtectedRoute = ({ user, children }) => {
+const ProtectedRoute: React.FC<RoutProps> = ({ user, children }) => {
   if (!user) {
     return <Navigate to="/" replace />;
   }

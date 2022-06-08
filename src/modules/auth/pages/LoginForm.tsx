@@ -1,31 +1,31 @@
-import { useState } from "react";
+import React, { ChangeEvent,  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import AuthAxios from "../../../core/api/request";
-import { login, setUser } from "../../../redux/features/auth/authSlice";
-import Input from "./components/Input";
+import { login, selectCurrentUser } from "../../../redux/features/auth/authSlice";
+import { Input } from "./components/Input";
+import {ILoginForm, Errors} from "../../../Interfaces"
 function LoginForm() {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => ({ ...state.auth }));
+  const  user = useSelector(selectCurrentUser)
   console.log(user);
 
   const navigate = useNavigate();
-  const [formErrors, setFormErrors] = useState({});
-  const [formData, setFormData] = useState({
+  const [formErrors, setFormErrors] = useState<Errors>({});
+  const [formData, setFormData] = useState<ILoginForm>({
     email: "",
     password: "",
   });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = event.target
     setFormData({
       ...formData,
       [name]: value,
     });
   };
 
-  const validate = (formData) => {
-    let errors = {};
+  const validate = (formData: ILoginForm) => {
+    let errors: Errors = {};
     if (!formData.email) {
       errors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -38,8 +38,8 @@ function LoginForm() {
     return errors;
   };
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const handleLogin = async (event: React.SyntheticEvent) => {
+    event.preventDefault();
     setFormErrors(validate(formData));
     if (
       Object.keys(formErrors).length === 0 &&
@@ -48,11 +48,6 @@ function LoginForm() {
     ) {
       try {
         dispatch(login(formData));
-        // const res = await AuthAxios.post(`/user/log-in`, {
-        //   email: formData.email,
-        //   password: formData.password,
-        // });
-        // window.localStorage.setItem("token", res.data.accessToken);
         navigate("/");
       } catch (error) {
         console.log(error);

@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { setLogout } from "../../redux/features/auth/authSlice";
+import { setLogout, selectCurrentUser } from "../../redux/features/auth/authSlice";
 
 function Navbar() {
-  const { user } = useSelector((state) => ({ ...state.auth }));
   const dispatch = useDispatch();
+  const user = useSelector(selectCurrentUser)
+  console.log(user);
+  
   const handleLogout = () => {
     dispatch(setLogout());
   };

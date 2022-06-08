@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import AuthAxios from "../../../core/api/request";
-import Input from "./components/Input";
+import { Errors, IRegisterForm } from "../../../Interfaces";
+import { Input }from "./components/Input";
 function RegisterForm() {
   const navigate = useNavigate();
-  const [formErrors, setFormErrors] = useState({});
+  const [formErrors, setFormErrors] = useState<Errors>({});
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<IRegisterForm>({
     email: "",
     password: "",
     confirmedPassword: "",
   });
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({
       ...formData,
@@ -20,8 +21,8 @@ function RegisterForm() {
     });
   };
 
-  const validate = (formData) => {
-    let errors = {};
+  const validate = (formData: IRegisterForm) => {
+    let errors: Errors = {};
     if (!formData.email) {
       errors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
