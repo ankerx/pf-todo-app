@@ -1,13 +1,16 @@
-import React, { ChangeEvent,  useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { ChangeEvent, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { login, selectCurrentUser } from "../../../redux/features/auth/authSlice";
+import {
+  login,
+  selectCurrentUser,
+} from "../../../redux/features/auth/authSlice";
 import { Input } from "./components/Input";
-import {ILoginForm, Errors} from "../../../Interfaces"
+import { ILoginForm, Errors } from "../../../Interfaces";
+import { useAppDispatch } from "../../../core/hooks/redux";
 function LoginForm() {
-  const dispatch = useDispatch();
-  const  user = useSelector(selectCurrentUser)
-  console.log(user);
+  const dispatch = useAppDispatch();
+  const user = useSelector(selectCurrentUser);
 
   const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState<Errors>({});
@@ -17,7 +20,7 @@ function LoginForm() {
   });
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = event.target
+    const { name, value } = event.target;
     setFormData({
       ...formData,
       [name]: value,

@@ -1,21 +1,14 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import configData from "../../configData.json";
 
-const AuthAxios = axios.create({
-  baseURL: configData.SERVER_URL,
-  headers: {
-    Authorization: `Bearer ${JSON.parse(
-      localStorage.getItem("user") as string
-    )}`,
-  },
-});
-export default AuthAxios;
-
 const instance = axios.create({
   baseURL: configData.SERVER_URL,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
+    Authorization: `Bearer ${JSON.parse(
+      localStorage.getItem("user") as string
+    )}`,
   },
 });
 const logger = (data: AxiosResponse, url: string) => {

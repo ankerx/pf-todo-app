@@ -1,25 +1,25 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
-import AuthAxios from "../../../core/api/request";
+import { api } from "../../../core/api/methods";
 import { ILoginForm } from "../../../Interfaces";
 import { RootState } from "../../store";
 
-
-interface UserState  {
-  user: string | null
-  isError: boolean
-  isSuccess: boolean
+interface UserState {
+  user: string | null;
+  isError: boolean;
+  isSuccess: boolean;
 }
 
 export const login = createAsyncThunk(
   "auth/login",
-  async ({email, password}) => {
+  async ({ email, password }) => {
     try {
-      const { data }= await AuthAxios.post("/user/log-in", {
+      const { data } = await api.post("/user/log-in", {
         email,
         password,
       });
-      return data.accessToken
+      console.log(data);
+      return data.accessToken;
     } catch (error) {
       console.log(error);
     }

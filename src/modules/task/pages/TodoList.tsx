@@ -2,7 +2,12 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { taskApi } from "../api/taskApi";
 function TodoList() {
-  const [todos, setTodos] = useState<[]>([]);
+   type Todo = {
+    _id: string
+    name: string
+    v: number
+  }
+  const [todos, setTodos] = useState<Array<Todo>>([]);
   console.log(todos)
   const fetchTodos = () => {
     taskApi
@@ -20,8 +25,9 @@ function TodoList() {
       .then((res) => {
         return res;
       })
-      .then(setTodos(todos.filter((todo) => todo._id !== id)))
       .catch((err) => console.log(err));
+      const updatedTodos = todos.filter(todo => todo._id !== id)
+      setTodos(updatedTodos)
   };
 
   return (
