@@ -40,18 +40,3 @@ test("register user", () => {
   userEvent.click(button);
   expect(window.localStorage.getItem("token")).toEqual("user_token");
 });
-
-// test("register user", async () => {
-//   render(<RegisterForm />);
-//   const emailInput = screen.getAllByLabelText(/email/i);
-//   const passwordInput = screen.getAllByLabelText("Password");
-//   const confirmPasswordInput = screen.getAllByLabelText(/confirm password/i);
-//   const button = screen.getAllByRole("button");
-//   userEvent.type(emailInput, "johny bravo");
-//   userEvent.type(passwordInput, "12345678");
-//   userEvent.type(confirmPasswordInput, "12345678");
-
-//   userEvent.click(button);
-
-//   expect(window.sessionStorage.getItem("token")).toEqual("user_token");
-// });
