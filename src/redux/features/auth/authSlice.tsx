@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { AxiosResponse } from "axios";
 import { api } from "../../../core/api/methods";
 import { ILoginForm } from "../../../Interfaces";
 import { RootState } from "../../store";
@@ -12,7 +11,7 @@ interface UserState {
 
 export const login = createAsyncThunk(
   "auth/login",
-  async ({ email, password }) => {
+  async ({ email, password }: ILoginForm) => {
     try {
       const { data } = await api.post("/user/log-in", {
         email,

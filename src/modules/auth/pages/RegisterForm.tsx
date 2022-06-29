@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import AuthAxios from "../../../core/api/request";
+import { api } from "../../../core/api/methods";
 import { Errors, IRegisterForm } from "../../../Interfaces";
-import { Input }from "./components/Input";
+import { Input } from "./components/Input";
 function RegisterForm() {
   const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState<Errors>({});
@@ -49,7 +49,7 @@ function RegisterForm() {
       formData.password === formData.confirmedPassword
     ) {
       try {
-        const res = await AuthAxios.post(`/user/sign-up`, userObject);
+        const res = await api.post(`/user/sign-up`, userObject);
         window.localStorage.setItem("token", res.data.accessToken);
         navigate("/log-in");
       } catch (error) {
@@ -62,6 +62,7 @@ function RegisterForm() {
   };
   return (
     <div className=" flex items-center justify-center">
+      <h1>hello world</h1>
       <form className="flex flex-col items-center max-w-sm ">
         <Input
           label="Email"
@@ -83,7 +84,7 @@ function RegisterForm() {
           placeholder="Password"
         />
         <Input
-          label="Confirm assword"
+          label="Confirm password"
           type="password"
           onChange={handleChange}
           value={formData.confirmedPassword}
