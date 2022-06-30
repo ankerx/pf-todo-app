@@ -4,7 +4,7 @@ export const taskApi = {
   getAllTasks: function () {
     return api.get("/task");
   },
-  get: function (id: number) {
+  get: function (id: string) {
     return api.get(`/task/${id}`);
   },
   create: function (name: string) {
@@ -14,7 +14,7 @@ export const taskApi = {
     return api.put(`/task/${id}`, { name });
   },
 
-  delete: function (id: number) {
+  delete: function (id: string) {
     return api.delete(`/task/${id}`);
   },
 };

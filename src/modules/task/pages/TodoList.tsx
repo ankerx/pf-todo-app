@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { taskApi } from "../api/taskApi";
 function TodoList() {
-   type Todo = {
-    _id: string
-    name: string
-    v: number
-  }
+  type Todo = {
+    _id: string;
+    name: string;
+    v: number;
+  };
   const [todos, setTodos] = useState<Array<Todo>>([]);
-  console.log(todos)
+  console.log(todos);
   const fetchTodos = () => {
     taskApi
       .getAllTasks()
@@ -19,15 +19,15 @@ function TodoList() {
     fetchTodos();
   }, []);
 
-  const handleDelete = (id:string) => {
+  const handleDelete = (id: string) => {
     taskApi
       .delete(id)
       .then((res) => {
         return res;
       })
       .catch((err) => console.log(err));
-      const updatedTodos = todos.filter(todo => todo._id !== id)
-      setTodos(updatedTodos)
+    const updatedTodos = todos.filter((todo) => todo._id !== id);
+    setTodos(updatedTodos);
   };
 
   return (

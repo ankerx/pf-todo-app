@@ -4,7 +4,7 @@ interface Props {
   placeholder: string;
   value: string | number;
   name: string;
-  onChange:(e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Input: React.FC<Props> = (props) => {
@@ -21,6 +21,4 @@ export const Input: React.FC<Props> = (props) => {
       />
     </>
   );
-}
-
-
+};

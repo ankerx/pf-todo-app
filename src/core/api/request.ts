@@ -1,8 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import configData from "../../configData.json";
+
+import { config } from "./config";
 
 const instance = axios.create({
-  baseURL: configData.SERVER_URL,
+  baseURL: config.apiUrl,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

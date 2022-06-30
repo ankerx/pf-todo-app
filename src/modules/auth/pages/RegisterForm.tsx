@@ -50,7 +50,8 @@ function RegisterForm() {
     ) {
       try {
         const res = await api.post(`/user/sign-up`, userObject);
-        window.localStorage.setItem("token", res.data.accessToken);
+        console.log(res);
+        window.localStorage.setItem("token", res.accessToken);
         navigate("/log-in");
       } catch (error) {
         console.log(error);
@@ -62,7 +63,6 @@ function RegisterForm() {
   };
   return (
     <div className=" flex items-center justify-center">
-      <h1>hello world</h1>
       <form className="flex flex-col items-center max-w-sm ">
         <Input
           label="Email"

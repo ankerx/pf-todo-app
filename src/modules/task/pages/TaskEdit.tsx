@@ -5,14 +5,14 @@ import { taskApi } from "../api/taskApi";
 import { Todo } from "../../../Interfaces";
 const TaskEdit: FC = () => {
   type Params = {
-    id: string
-  }
+    id: any;
+  };
   const navigate = useNavigate();
 
-  const { id }  = useParams<Params>()
-  const [todo, setTodo] = useState<Todo>({name:""});
+  const { id } = useParams<Params>();
+  const [todo, setTodo] = useState<Todo>({ name: "" });
   const [newValue, setNewValue] = useState<string>("");
-  console.log(typeof id)
+
   useEffect(() => {
     taskApi
       .get(id)
@@ -20,17 +20,17 @@ const TaskEdit: FC = () => {
       .catch((err) => console.log(err));
     setNewValue(todo.name);
   }, [todo.name, id]);
-  console.log(todo)
+  console.log(todo);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewValue(event.target.value);
   };
   const handleUpdate = async () => {
     try {
-      const res = await taskApi.update(id,newValue)
-      navigate("/")
-      return res
+      const res = await taskApi.update(id, newValue);
+      navigate("/");
+      return res;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -43,6 +43,6 @@ const TaskEdit: FC = () => {
       />
     </div>
   );
-}
+};
 
 export default TaskEdit;

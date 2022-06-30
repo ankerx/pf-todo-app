@@ -8,15 +8,13 @@ import RegisterForm from "./modules/auth/pages/RegisterForm";
 import { Loading } from "./core/components/Loading";
 import { useDispatch } from "react-redux";
 import { setUser } from "./redux/features/auth/authSlice";
-const CreateTask = React.lazy(() =>
-  import("./modules/task/pages/CreateTask")
-);
+const CreateTask = React.lazy(() => import("./modules/task/pages/CreateTask"));
 const EditTask = React.lazy(() => import("./modules/task/pages/TaskEdit"));
 const Home = React.lazy(() => import("./pages/Home"));
 const App: FC = () => {
   const dispatch = useDispatch();
   const user: string = JSON.parse(localStorage.getItem("user")!);
-  console.log(user);
+
   useEffect(() => {
     dispatch(setUser(user));
   }, [dispatch, user]);

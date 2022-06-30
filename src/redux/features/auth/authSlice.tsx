@@ -13,12 +13,12 @@ export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }: ILoginForm) => {
     try {
-      const { data } = await api.post("/user/log-in", {
+      const res = await api.post("/user/log-in", {
         email,
         password,
       });
-      console.log(data);
-      return data.accessToken;
+      console.log(res.accessToken);
+      return res.accessToken;
     } catch (error) {
       console.log(error);
     }
@@ -36,14 +36,14 @@ const authSlice = createSlice({
     setUser: (state, action: PayloadAction<string>) => {
       state.user = action.payload;
     },
-    setLogout: (state, action: PayloadAction) => {
+    setLogout: (state) => {
       localStorage.clear();
       state.user = null;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(login.rejected, (state, action) => {
+      .addCase(login.rejected, (state) => {
         state.isSuccess = false;
         state.isError = true;
       })
