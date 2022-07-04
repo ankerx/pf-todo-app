@@ -23,6 +23,7 @@ export const authHandler = [
     );
   }),
   rest.post("/user/log-in", (req, res, ctx) => {
+    console.log(req);
     return res(
       ctx.json({
         user: {

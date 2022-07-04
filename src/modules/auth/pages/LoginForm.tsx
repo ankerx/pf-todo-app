@@ -1,16 +1,12 @@
 import React, { ChangeEvent, useState } from "react";
-import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  login,
-  selectCurrentUser,
-} from "../../../redux/features/auth/authSlice";
+import { login } from "../../../redux/features/auth/authSlice";
 import { Input } from "./components/Input";
 import { ILoginForm, Errors } from "../../../Interfaces";
 import { useAppDispatch } from "../../../core/hooks/redux";
+
 function LoginForm() {
   const dispatch = useAppDispatch();
-  const user = useSelector(selectCurrentUser);
 
   const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState<Errors>({});
