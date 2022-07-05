@@ -8,17 +8,16 @@ import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 test("fetches & receives a user after clicking the fetch user button", async () => {
   renderWithProviders(
-    <Provider store={setupStore()}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="log-in" element={<LoginForm />} />
-        </Routes>
-      </BrowserRouter>
-    </Provider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginForm />} />
+      </Routes>
+    </BrowserRouter>
   );
-
-  const test = screen.getByText(/hello/i);
+  // screen.debug();
+  const test = await screen.findByText(/hello/i);
   expect(test).toBeInTheDocument();
-  // fireEvent.change(inputElement, { target: { value: "test@o2.pl" } });
-  // expect(inputElement.value).toBe("test@o2.pl");
+  const inputElement = await screen.findByPlaceholderText("Email");
+  fireEvent.change(inputElement, { target: { value: "test@o2.pl" } });
+  expect(inputElement.value).toBe("test@o2.pl");
 });
