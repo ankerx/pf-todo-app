@@ -25,7 +25,7 @@ export const login = createAsyncThunk(
   }
 );
 const initialState: UserState = {
-  user: null,
+  user: JSON.parse(localStorage.getItem("user")!) || null,
   isError: false,
   isSuccess: false,
 };
@@ -33,7 +33,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<string>) => {
+    setUser: (state, action: PayloadAction<string | null>) => {
       state.user = action.payload;
     },
     setLogout: (state) => {

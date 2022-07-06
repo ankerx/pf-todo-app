@@ -6,14 +6,15 @@ import RedirectRoute from "./core/components/RedirectRoute";
 import LoginForm from "./modules/auth/pages/LoginForm";
 import RegisterForm from "./modules/auth/pages/RegisterForm";
 import { Loading } from "./core/components/Loading";
-import { useDispatch } from "react-redux";
-import { setUser } from "./redux/features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCurrentUser, setUser } from "./redux/features/auth/authSlice";
+import { RootState } from "./redux/store";
 const CreateTask = React.lazy(() => import("./modules/task/pages/CreateTask"));
 const EditTask = React.lazy(() => import("./modules/task/pages/TaskEdit"));
 const Home = React.lazy(() => import("./pages/Home"));
 const App: FC = () => {
   const dispatch = useDispatch();
-  const user: string = JSON.parse(localStorage.getItem("user")!);
+  const user = useSelector((state: RootState) => state.auth.user);
 
   useEffect(() => {
     dispatch(setUser(user));
