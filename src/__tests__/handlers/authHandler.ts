@@ -1,7 +1,7 @@
 import { rest } from "msw";
 
 export const authHandler = [
-  rest.post("/user/sign-up", (req, res, ctx) => {
+  rest.post("http://localhost:8080/user/sign-up", (req, res, ctx) => {
     return res(
       ctx.json({
         user: {
@@ -22,7 +22,7 @@ export const authHandler = [
       })
     );
   }),
-  rest.post("/user/log-in", (req, res, ctx) => {
+  rest.post("http://localhost:8080/user/log-in", (req, res, ctx) => {
     console.log(req);
     return res(
       ctx.json({
