@@ -6,8 +6,12 @@ test("login functionality", async () => {
   renderWithProviders(<App />, { route: "/log-in" });
 
   const buttonElement = await screen.findByDisplayValue("Login");
-  const emailInputElement = await screen.findByPlaceholderText("Email");
-  const passwordInputElement = await screen.findByPlaceholderText("Password");
+  const emailInputElement = (await screen.findByPlaceholderText(
+    "Email"
+  )) as HTMLInputElement;
+  const passwordInputElement = (await screen.findByPlaceholderText(
+    "Password"
+  )) as HTMLInputElement;
 
   fireEvent.change(emailInputElement, { target: { value: "test@o2.pl" } });
   fireEvent.change(passwordInputElement, { target: { value: "123456" } });

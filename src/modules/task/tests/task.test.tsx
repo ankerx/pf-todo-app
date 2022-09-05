@@ -1,5 +1,4 @@
-import { findByText, fireEvent, screen } from "@testing-library/react";
-import { notDeepEqual } from "assert";
+import { fireEvent, screen } from "@testing-library/react";
 
 import App from "../../../App";
 import {
@@ -39,4 +38,40 @@ test("deleting task", async () => {
 
   expect(mockedTaskName).not.toBeInTheDocument();
   expect(mockedTaskName2).toBeInTheDocument();
+});
+
+test("add task", async () => {
+  renderWithProvidersAuthenticated(<App />, { route: "/addTask" });
+
+  const addBtn = await screen.findByText("Save");
+  const input = (await screen.findByPlaceholderText(
+    "Name of the task"
+  )) as HTMLInputElement;
+  expect(addBtn).toBeInTheDocument();
+  expect(input).toBeInTheDocument();
+  fireEvent.change(input, { target: { value: "my new task" } });
+
+  expect(input.value).toBe("my new task");
+  fireEvent.click(addBtn);
+
+  //navigate to home
+  expect(await screen.findByText("Tasks")).toBeInTheDocument();
+});
+
+test("edit task", async () => {
+  renderWithProvidersAuthenticated(<App />, { route: "/edit/:1234" });
+
+  const addBtn = await screen.findByText("Save");
+  const input = (await screen.findByPlaceholderText(
+    "Name of the task"
+  )) as HTMLInputElement;
+  expect(addBtn).toBeInTheDocument();
+  expect(input).toBeInTheDocument();
+  fireEvent.change(input, { target: { value: "my updated task" } });
+
+  expect(input.value).toBe("my updated task");
+  fireEvent.click(addBtn);
+
+  //navigate to home
+  expect(await screen.findByText("Tasks")).toBeInTheDocument();
 });
