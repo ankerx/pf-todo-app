@@ -4,15 +4,15 @@ export const taskHandler = [
   rest.get("http://localhost:8080/task", (req, res, ctx) => {
     return res(
       ctx.json([
-        { name: "do smth", __v: 0, id: "1234" },
-        { name: "wash car", __v: 0, id: "123" },
+        { name: "do smth", __v: 0, _id: "1234" },
+        { name: "wash car", __v: 0, _id: "4321" },
       ])
     );
   }),
-  rest.get("/task/:1234", (req, res, ctx) => {
-    return res(ctx.json({ name: "do smth", __v: 0, id: "1234" }));
+  rest.get("http://localhost:8080/task/:1234", (req, res, ctx) => {
+    return res(ctx.json({ name: "do smth", __v: 0, _id: "1234" }));
   }),
-  rest.post("/task/", (req, res, ctx) => {
+  rest.post("http://localhost:8080/task", (req, res, ctx) => {
     return res(
       ctx.json({
         task: {
@@ -24,7 +24,8 @@ export const taskHandler = [
       })
     );
   }),
-  rest.put("/task/:1234", (req, res, ctx) => {
+
+  rest.put("http://localhost:8080/task/:1234", (req, res, ctx) => {
     return res(
       ctx.json({
         task: {
@@ -36,7 +37,8 @@ export const taskHandler = [
       })
     );
   }),
-  rest.delete("/task/:1234", (req, res, ctx) => {
+
+  rest.delete("http://localhost:8080/task/:1234", (req, res, ctx) => {
     return res(
       ctx.json({
         success: true,
