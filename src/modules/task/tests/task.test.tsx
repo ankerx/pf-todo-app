@@ -58,6 +58,20 @@ test("add task", async () => {
   expect(await screen.findByText("Tasks")).toBeInTheDocument();
 });
 
+test("validate task input", async () => {
+  renderWithProvidersAuthenticated(<App />, { route: "/addTask" });
+
+  const addBtn = await screen.findByText("Save");
+  const input = (await screen.findByPlaceholderText(
+    "Name of the task"
+  )) as HTMLInputElement;
+  expect(addBtn).toBeInTheDocument();
+  expect(input).toBeInTheDocument();
+  fireEvent.change(input, { target: { value: "" } });
+
+  expect(await screen.findByText("Input can't be empty!")).toBeInTheDocument();
+});
+
 test("edit task", async () => {
   renderWithProvidersAuthenticated(<App />, { route: "/edit/:1234" });
 
