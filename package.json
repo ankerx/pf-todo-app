@@ -27,14 +27,16 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "husky install",
-    "lint": "lint-staged",
     "pre-commit": "lint-staged",
-    "eslint": "eslint --ext .js,.jsx,.ts,.tsx --fix ."
+    "test:ci": "cross-env CI=true react-scripts test --silent",
+    "eslint": "eslint --ext .js,.jsx,.ts,.tsx --fix .",
+    "lint": "eslint ./src --ext .jsx,.js,.ts,.tsx --ignore-path ./.gitignore",
+    "lint:ci": "eslint ./src --ext .jsx,.js,.ts,.tsx --cache --ignore-path ./.gitignore",
+    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
+    "lint:format": "prettier --write ./src",
+    "type-check": "tsc",
+    "prepare": "husky install"
   },
-  "coveragePathIgnorePatterns": [
-    "src/__tests__/"
-  ],
   "eslintConfig": {
     "extends": [
       "react-app",

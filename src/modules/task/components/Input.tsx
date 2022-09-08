@@ -7,7 +7,6 @@ interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 export const Input: React.FC<Props> = (props) => {
-  const a: number = "abc";
   const navigate = useNavigate();
   const onCancel = () => {
     navigate("/");

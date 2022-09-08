@@ -1,6 +1,6 @@
 /** @type {import('jest').Config} */
 const config = {
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+  collectCoverageFrom: ["!**/__tests__/**"],
 };
 
 module.exports = config;
