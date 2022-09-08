@@ -2,12 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router";
 
 interface Props {
-  value: string | number
-  onClick: React.MouseEventHandler<HTMLButtonElement>
-  onChange:(e: React.ChangeEvent<HTMLInputElement>) => void
-
+  value: string | number;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 export const Input: React.FC<Props> = (props) => {
+  const a: number = "abc";
   const navigate = useNavigate();
   const onCancel = () => {
     navigate("/");
@@ -25,22 +25,14 @@ export const Input: React.FC<Props> = (props) => {
       />
 
       <div className="w-full">
-        <button
-          onClick={props.onClick}
-          className="py-2 px-4 bg-cyan-700 w-full mt-3 text-white"
-        >
+        <button onClick={props.onClick} className="py-2 px-4 bg-cyan-700 w-full mt-3 text-white">
           Save
         </button>
 
-        <button
-          onClick={onCancel}
-          className="py-2 px-4 border border-black w-full mt-1"
-        >
+        <button onClick={onCancel} className="py-2 px-4 border border-black w-full mt-1">
           Cancel
         </button>
       </div>
     </form>
   );
-}
-
-
+};

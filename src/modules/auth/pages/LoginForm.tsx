@@ -1,9 +1,10 @@
 import React, { ChangeEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
+import { Errors, ILoginForm } from "../../../Interfaces";
+import { useAppDispatch } from "../../../core/hooks/redux";
 import { login } from "../../../redux/features/auth/authSlice";
 import { Input } from "./components/Input";
-import { ILoginForm, Errors } from "../../../Interfaces";
-import { useAppDispatch } from "../../../core/hooks/redux";
 
 function LoginForm() {
   const dispatch = useAppDispatch();
@@ -60,10 +61,7 @@ function LoginForm() {
   return (
     <div className=" flex items-center justify-center">
       <h1>Login</h1>
-      <form
-        onSubmit={handleLogin}
-        className="flex flex-col items-center max-w-sm "
-      >
+      <form onSubmit={handleLogin} className="flex flex-col items-center max-w-sm ">
         <Input
           label="Email"
           type="email"
@@ -72,9 +70,7 @@ function LoginForm() {
           value={formData.email}
           name="email"
         />
-        {formErrors.email && (
-          <p className="text-red-500 text-sm">{formErrors.email}</p>
-        )}
+        {formErrors.email && <p className="text-red-500 text-sm">{formErrors.email}</p>}
         <Input
           label="Password"
           type="password"
@@ -84,9 +80,7 @@ function LoginForm() {
           placeholder="Password"
         />
 
-        {formErrors.password && (
-          <p className="text-red-500 text-sm">{formErrors.password}</p>
-        )}
+        {formErrors.password && <p className="text-red-500 text-sm">{formErrors.password}</p>}
         <input
           type="submit"
           className="py-2 px-4 bg-cyan-700 text-white w-full mt-3"

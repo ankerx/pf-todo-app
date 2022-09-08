@@ -1,14 +1,16 @@
-import React, { useEffect, FC } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { FC, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { Loading } from "./core/components/Loading";
 import Navbar from "./core/components/Navbar";
 import ProtectedRoute from "./core/components/ProtectedRoute";
 import RedirectRoute from "./core/components/RedirectRoute";
 import LoginForm from "./modules/auth/pages/LoginForm";
 import RegisterForm from "./modules/auth/pages/RegisterForm";
-import { Loading } from "./core/components/Loading";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentUser, setUser } from "./redux/features/auth/authSlice";
+import { setUser } from "./redux/features/auth/authSlice";
 import { RootState } from "./redux/store";
+
 const CreateTask = React.lazy(() => import("./modules/task/pages/CreateTask"));
 const EditTask = React.lazy(() => import("./modules/task/pages/TaskEdit"));
 const Home = React.lazy(() => import("./pages/Home"));

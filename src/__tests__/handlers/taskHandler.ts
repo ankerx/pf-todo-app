@@ -6,7 +6,7 @@ export const taskHandler = [
       ctx.json([
         { name: "do smth", __v: 0, _id: "1234" },
         { name: "wash car", __v: 0, _id: "4321" },
-      ])
+      ]),
     );
   }),
   rest.get("http://localhost:8080/task/:1234", (req, res, ctx) => {
@@ -21,7 +21,7 @@ export const taskHandler = [
           __v: 0,
         },
         success: true,
-      })
+      }),
     );
   }),
 
@@ -34,7 +34,7 @@ export const taskHandler = [
           __v: 0,
         },
         success: true,
-      })
+      }),
     );
   }),
 
@@ -43,7 +43,7 @@ export const taskHandler = [
       ctx.json({
         success: true,
         message: "Task deleted",
-      })
+      }),
     );
   }),
 ];

@@ -1,8 +1,10 @@
 import { ChangeEvent, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { api } from "../../../core/api/methods";
+import { Link, useNavigate } from "react-router-dom";
+
 import { Errors, IRegisterForm } from "../../../Interfaces";
+import { api } from "../../../core/api/methods";
 import { Input } from "./components/Input";
+
 function RegisterForm() {
   const navigate = useNavigate();
   const [formErrors, setFormErrors] = useState<Errors>({});
@@ -72,9 +74,7 @@ function RegisterForm() {
           name="email"
           placeholder="Email"
         />
-        {formErrors.email && (
-          <p className="text-red-500 text-sm">{formErrors.email}</p>
-        )}
+        {formErrors.email && <p className="text-red-500 text-sm">{formErrors.email}</p>}
         <Input
           label="Password"
           type="password"
@@ -91,9 +91,7 @@ function RegisterForm() {
           name="confirmedPassword"
           placeholder="Confirm password"
         />
-        {formErrors.password && (
-          <p className="text-red-500 text-sm">{formErrors.password}</p>
-        )}
+        {formErrors.password && <p className="text-red-500 text-sm">{formErrors.password}</p>}
         <input
           type="button"
           className="py-2 px-4 bg-cyan-700 text-white  w-full mt-3"
