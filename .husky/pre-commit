@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# npx --no -- commitlint --edit 
-# npm run pre-commit  
+npx --no -- commitlint --edit 
+npm run pre-commit  
 # npm test
  
 
